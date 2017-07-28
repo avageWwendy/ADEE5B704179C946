@@ -1,7 +1,8 @@
 #include <p32xxxx.h>
 #include <plib.h>
 
-const unsigned char data = 0b00101101;
+const unsigned short data[16] = {0x00, 0x0001, 0x0002, 0x0003, 0x0004, 0x0005, 0x0006, 0x0007, 0x0008, 0x0009, 0x000A, 0x000B, 0x000C, 0x000D, 0x000E, 0x000F};
+int data_num = 0;
 
 #define LED_SERIAL	PORTDbits.RD4
 #define LED_SRCLK	PORTDbits.RD5
@@ -10,7 +11,7 @@ const unsigned char data = 0b00101101;
 
 void Config_LED(){
 	PORTDCLR = 0xFFFF;	// Clear all PORTD
-	TRISD = 0x0000;		// bit = 0 output, bit = 1 input
+	TRISDCLR = 0x00F0;	// bit = 0 output, bit = 1 input
 						// PORTD[4] = shift reg serial input
 						// PORTD[5] = shift reg CLK
 						// PORTD[6] = reg CLK
@@ -20,9 +21,10 @@ void Config_LED(){
 
 void shift_LED(){ 
 	int k;
-	for (k = 0; k < 8; k++) {
+	data_num = (data_num+1)%16;
+	for (k = 0; k < 16; k++) {
 		LED_SRCLK = 0;				// shift reg CLK = 0
-		LED_SERIAL = (data >> k);	// shift data into reg
+		LED_SERIAL = ((data[data_num] >> k) & 0x0001);	// shift data into reg
 		LED_SRCLK = 1;				// shift reg CLK = 1
 	}
 }
@@ -35,7 +37,7 @@ void Config_Timer4() {
 
 	// 16-bit timer, 1s, SYSCLK = 4 MHz, PBCLK = SYSCLK/1
 	T4CON = 0x0060; 	// stop Timer 4 and clear control register, 16-bit timer
-						// set prescaler as 1:256, internal clock source
+						// set prescaler as 1:64, internal clock source
 	TMR4 = 0x0; 		// clear timer register
 	PR4 = 0xF423;		// load period register, 1 s
 	T4CONSET = 0x8000;	// start Timer 4
@@ -60,5 +62,3 @@ int main() {
 
 	while(1);
 }
-
-/* test git */
