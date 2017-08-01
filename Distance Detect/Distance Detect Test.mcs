@@ -13,7 +13,7 @@ SOLK=<src>|Ultrasonic Distance Detect.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=-g
 TraceCmdString=
-DebugOptions=-D__DEBUG
+DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_PIC32MXSK=1
 [File001]
 Location=C:\Users\Wendy\Desktop\Project\Distance Detect\Distance Detect Test.elf
 Folder=Output
@@ -26,7 +26,7 @@ SOLK=<src>|Ultrasonic Distance Detect.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=-o"$(BINDIR_)$(TARGETBASE).$(TARGETSUFFIX)" -Map="$(BINDIR_)$(TARGETBASE).map"
 TraceCmdString=
-DebugOptions=--defsym=__MPLAB_DEBUG=1
+DebugOptions=--defsym=__MPLAB_DEBUG=1 --defsym=__MPLAB_DEBUGGER_PIC32MXSK=1
 [File002]
 Location=C:\Users\Wendy\Desktop\Project\Distance Detect\Distance Detect Test.hex
 Folder=Output
@@ -39,7 +39,7 @@ SOLK=<src>|Ultrasonic Distance Detect.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=-o"$(BINDIR_)$(TARGETBASE).$(TARGETSUFFIX)" -Map="$(BINDIR_)$(TARGETBASE).map"
 TraceCmdString=
-DebugOptions=--defsym=__MPLAB_DEBUG=1
+DebugOptions=--defsym=__MPLAB_DEBUG=1 --defsym=__MPLAB_DEBUGGER_PIC32MXSK=1
 [TOOL_LOC_STAMPS]
 tool_loc{430F471F-7ECB-4852-A80D-DEF9A5C8E751}=C:\Program Files (x86)\Microchip Starter Kits\PIC32 Starter Kits\MPLAB C32 Suite\bin\pic32-gcc.exe
 tool_loc{C68E5105-1196-4333-A0BF-3DC57271E614}=C:\Program Files (x86)\Microchip Starter Kits\PIC32 Starter Kits\MPLAB C32 Suite\bin\pic32-ld.exe
